@@ -8,8 +8,11 @@ from typing import Iterator
 
 
 def default_sqlite_path() -> str:
-    # Keep default aligned with typical local run.
-    return str(Path(__file__).resolve().parents[1] / "o2c.sqlite")
+    # BASE_DIR is the backend/ folder
+    BASE_DIR = Path(__file__).resolve().parent.parent
+    path = BASE_DIR / "o2c.sqlite"
+    print(f"Loading data from: {BASE_DIR}")
+    return str(path)
 
 
 def get_sqlite_path() -> str:
