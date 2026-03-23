@@ -1,4 +1,5 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL || "";
+console.log("Dodge AI API Base URL:", BASE_URL || "[WARNING: BASE_URL is UNDEFINED. Using relative paths.]");
 
 export async function fetchGraph({ billing_document, include_journal_entry, include_payments } = {}) {
   const params = new URLSearchParams();
