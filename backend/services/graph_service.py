@@ -3,7 +3,7 @@ from __future__ import annotations
 import sqlite3
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-from backend.services.query_tools import trace_billing_document
+from services.query_tools import trace_billing_document
 
 
 def _node_id(node_type: str, raw_id: str) -> str:

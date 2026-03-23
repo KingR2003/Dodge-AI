@@ -5,8 +5,8 @@ from typing import Any, Dict, Optional
 import sqlite3
 from fastapi import APIRouter, Query
 
-from backend.services.db import sqlite_connection
-from backend.services.graph_service import build_graph_for_billing_document
+from services.db import sqlite_connection
+from services.graph_service import build_graph_for_billing_document
 
 
 router = APIRouter()

@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from fastapi import APIRouter
 
-from backend.models import ChatRequest, ChatResponse
-from backend.services.chat_service import chat
+from models import ChatRequest, ChatResponse
+from services.chat_service import chat
 
 
 router = APIRouter()

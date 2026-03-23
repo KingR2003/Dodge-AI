@@ -4,8 +4,8 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import sqlite3
 
-from backend.services.graph_service import build_graph_for_billing_document
-from backend.services.query_tools import (
+from services.graph_service import build_graph_for_billing_document
+from services.query_tools import (
     incomplete_sales_orders,
     payment_trace,
     top_customers,

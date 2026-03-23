@@ -3,17 +3,17 @@ from __future__ import annotations
 import logging
 from typing import Any, Dict, List
 
-from backend.models import ChatResponse
-from backend.prompts import TOOL_SELECTOR_SYSTEM_PROMPT
-from backend.services.db import sqlite_connection
-from backend.services.gemini_client import (
+from models import ChatResponse
+from prompts import TOOL_SELECTOR_SYSTEM_PROMPT
+from services.db import sqlite_connection
+from services.gemini_client import (
     GeminiAPIError,
     GeminiParseError,
     GeminiRateLimitError,
     get_gemini_api_key,
     select_tool_call_gemini,
 )
-from backend.services.query_executor import execute_selected_tool
+from services.query_executor import execute_selected_tool
 from guardrails import FIXED_REJECTION_MESSAGE, guardrails_decide
 
 logger = logging.getLogger(__name__)
