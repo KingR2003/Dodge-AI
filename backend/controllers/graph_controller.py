@@ -1,6 +1,7 @@
 import logging
 import traceback
 from pathlib import Path
+from typing import Any, Optional
 
 import sqlite3
 from fastapi import APIRouter, Query
