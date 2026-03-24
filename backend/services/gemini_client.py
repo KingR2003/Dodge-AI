@@ -36,7 +36,12 @@ class GeminiParseError(Exception):
 def get_gemini_api_key() -> str:
     key = (os.environ.get("GEMINI_API_KEY") or "").strip()
     if not key:
+        logger.error("GEMINI_API_KEY is missing from environment variables!")
         raise RuntimeError(_MSG_NO_KEY)
+    
+    # Log presence (but mask for security)
+    masked = key[:4] + "..." + key[-4:] if len(key) > 8 else "****"
+    logger.info(f"Using GEMINI_API_KEY: {masked}")
     return key
 
 

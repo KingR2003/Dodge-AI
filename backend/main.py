@@ -1,9 +1,19 @@
+import os
+import sys
+import logging
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from controllers.chat_controller import router as chat_router
 from controllers.graph_controller import router as graph_router
 
+# Setup basic logging to see boot messages in Render
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+logger.info(f"Booting SAP O2C API. CWD: {os.getcwd()}")
+logger.info(f"Python path: {sys.path}")
 
 app = FastAPI(title="SAP O2C Graph Query API")
 
@@ -15,6 +25,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/health")
+def health_check():
+    return {
+        "status": "ok",
+        "cwd": os.getcwd(),
+        "python_version": sys.version,
+        "gemini_enabled": bool(os.environ.get("GEMINI_API_KEY"))
+    }
 
 app.include_router(graph_router)
 app.include_router(chat_router)
