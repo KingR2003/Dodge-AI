@@ -48,6 +48,8 @@ Relational storage remains the source of truth; graph payloads are produced from
 - `GET /graph`
   - Returns graph payload: `{ nodes: [{id, type, metadata}], edges: [{source, target, relationship}] }`
   - Supports loading a billing-document-centric subgraph
+- `GET /graph/full`
+  - Returns the complete graph of all business entities (~1,700 nodes)
 - `POST /chat`
   - Receives user question
   - Calls LLM for tool selection JSON
@@ -59,6 +61,7 @@ Relational storage remains the source of truth; graph payloads are produced from
 
 - Force-directed graph view
 - Node click to focus on one-hop neighborhood (lightweight expansion)
+- "Show All Nodes" button for global dataset visualization
 - Node metadata inspection panel
 - Chat panel integrated with `/chat`
 
@@ -236,4 +239,9 @@ npm run dev
 ```
 
 UI runs on `http://localhost:5173`, proxying `/graph` and `/chat` to backend.
+
+### 6) Deployment (Vercel/Render)
+
+- **Backend (Render)**: Set `SQLITE_PATH` and `GEMINI_API_KEY` in Environment Variables.
+- **Frontend (Vercel)**: Set `VITE_API_BASE_URL` to your backend URL.
 

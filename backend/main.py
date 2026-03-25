@@ -1,6 +1,15 @@
 import os
 import sys
 import logging
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Load environment variables from the root .env file
+env_path = Path(__file__).resolve().parent.parent / ".env"
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path)
+else:
+    load_dotenv()
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

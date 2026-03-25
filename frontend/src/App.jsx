@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { fetchGraph } from "./lib/api.js";
+import { fetchGraph, fetchFullGraph } from "./lib/api.js";
 import GraphView from "./components/GraphView.jsx";
 import ChatView from "./components/ChatView.jsx";
 import NodeDetails from "./components/NodeDetails.jsx";
@@ -27,6 +27,20 @@ export default function App() {
       setSelectedNode(null);
     } catch (e) {
       setGraphError(e?.message || "Failed to load graph");
+    } finally {
+      setLoadingGraph(false);
+    }
+  }
+
+  async function loadFullGraph() {
+    setGraphError(null);
+    setLoadingGraph(true);
+    try {
+      const data = await fetchFullGraph();
+      setGraph(data);
+      setSelectedNode(null);
+    } catch (e) {
+      setGraphError(e?.message || "Failed to load full graph");
     } finally {
       setLoadingGraph(false);
     }
@@ -64,6 +78,14 @@ export default function App() {
                   disabled={loadingGraph}
                 >
                   {loadingGraph ? "Loading..." : "Load"}
+                </button>
+                <button
+                  className="secondary"
+                  onClick={() => loadFullGraph()}
+                  disabled={loadingGraph}
+                  style={{ marginLeft: 8 }}
+                >
+                  Show All Nodes
                 </button>
               </div>
             </div>

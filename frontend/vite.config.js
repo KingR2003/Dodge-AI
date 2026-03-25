@@ -7,8 +7,8 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     proxy: {
-      "/graph": "http://127.0.0.1:8000",
-      "/chat": "http://127.0.0.1:8000",
+      "/graph": "http://127.0.0.1:8080",
+      "/chat": "http://127.0.0.1:8080",
     },
   },
 });

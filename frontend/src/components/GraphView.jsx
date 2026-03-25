@@ -153,7 +153,7 @@ export default function GraphView({ graph, onSelectNode }) {
         enablePanInteraction
         // Pre-warm enough ticks so nodes start spread out, then let a short cooldown
         // period play out naturally (smooth settle animation)
-        warmupTicks={80}
+        warmupTicks={160}
         cooldownTicks={60}
         d3AlphaDecay={0.025}        // gradual cool-down → natural settle
         d3VelocityDecay={0.4}       // moderate damping so nodes slow smoothly

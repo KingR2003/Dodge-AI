@@ -8,7 +8,10 @@ from fastapi import APIRouter, Query
 from fastapi.responses import JSONResponse
 
 from services.db import sqlite_connection
-from services.graph_service import build_graph_for_billing_document
+from services.graph_service import (
+    build_graph_for_billing_document,
+    build_full_graph,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +58,25 @@ def get_graph(
             
     except Exception as e:
         err_msg = f"Error in /graph endpoint: {str(e)}"
+        logger.error(err_msg)
+        logger.error(traceback.format_exc())
+        return JSONResponse(
+            status_code=500,
+            content={
+                "error": "Internal Server Error",
+                "detail": str(e),
+                "traceback": traceback.format_exc()
+            }
+        )
+
+
+@router.get("/graph/full")
+def get_full_graph() -> Any:
+    try:
+        with sqlite_connection() as conn:
+            return build_full_graph(conn)
+    except Exception as e:
+        err_msg = f"Error in /graph/full endpoint: {str(e)}"
         logger.error(err_msg)
         logger.error(traceback.format_exc())
         return JSONResponse(
